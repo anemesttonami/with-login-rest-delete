@@ -14,6 +14,7 @@ import static io.restassured.RestAssured.given;
 public class BookStoreApi {
 
     public static Response getAccountData(LoginDto dto) {
+
         Response response = given()
                 .filter(new AllureRestAssured())
                 .contentType(ContentType.JSON)
@@ -51,14 +52,14 @@ public class BookStoreApi {
 
         Response resp = loginResponse;
 
-         given()
+        given()
                 .filter(new AllureRestAssured())
                 .contentType(ContentType.JSON)
-                 .queryParam("UserId",(String) resp.path("userId"))
+                .queryParam("UserId", (String) resp.path("userId"))
                 .header("Authorization", "Bearer " + resp.path("token"))
-                 .log().all()
+                .log().all()
                 .when()
-         .delete("/BookStore/v1/Books")
+                .delete("/BookStore/v1/Books")
                 .then()
                 .statusCode(204)
                 .log().all().extract().response();

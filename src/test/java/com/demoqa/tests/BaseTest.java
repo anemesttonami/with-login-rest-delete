@@ -11,10 +11,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.util.Map;
 
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
@@ -29,25 +25,26 @@ public class BaseTest {
         Configuration.pageLoadStrategy = "eager";
 
         RestAssured.baseURI = "https://demoqa.com";
-
-        //для подключения к selenoid
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-
-        //активация работы видеозаписи
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-
-        ChromeOptions chromeOptions = new ChromeOptions();
-
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-
-        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-        Configuration.browserCapabilities = capabilities;
+//
+//        //для подключения к selenoid
+//        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+//
+//        //активация работы видеозаписи
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
+//
+//        ChromeOptions chromeOptions = new ChromeOptions();
+//
+//        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+//                "enableVNC", true,
+//                "enableVideo", true
+//        ));
+//
+//        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+//        Configuration.browserCapabilities = capabilities;
 
         //активация логгирования selenide - для отображения в Allure
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+
     }
 
     @AfterAll
